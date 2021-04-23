@@ -146,6 +146,7 @@
                             :align="column.align"
                             :fixed="column.fixed"
                             :header-align="column.headerAlign"
+                            :show-overflow-tooltip="column.showOverflowTooltip"
                         >
                             <template slot="header" slot-scope="scope">
                                 <span>{{ scope.column.label }}</span>
@@ -301,7 +302,7 @@ export default {
         this.$nextTick(() => {
             this.topViewHeight = this.$refs.topView.offsetHeight;
 
-            this.toolbarsViewHeight = this.$refs.toolbarsView.offsetHeight;
+            this.toolbarsViewHeight = this.$refs.toolbarsView? this.$refs.toolbarsView.offsetHeight:0;
 
             this.pageViewHeight = this.$refs.pageView ? this.$refs.pageView.offsetHeight : 0;
 
@@ -326,6 +327,7 @@ export default {
         },
         //表单过滤提交
         onFilterSubmit() {
+            this.page = 1;
             this.getData();
         },
         //表单还原
@@ -539,5 +541,11 @@ export default {
             }
         }
     }
+}
+
+// showOverflowTooltip
+.el-tooltip__popper.is-null {
+    background: #303133;
+    color: #fff;
 }
 </style>
